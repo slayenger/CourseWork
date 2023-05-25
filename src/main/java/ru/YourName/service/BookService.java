@@ -11,7 +11,7 @@ public interface BookService {
 
     public List<Book> getAllBooks();
 
-    public Book addNewBook(Book book);
+    public ResponseEntity<?> addNewBook(Book book);
 
     public ResponseEntity<?> getBookShort(Integer bookId);
 

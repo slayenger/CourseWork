@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import ru.YourName.dto.BookShort;
 import ru.YourName.model.Book;
 import ru.YourName.model.ReaderTicketUser;
@@ -29,10 +30,12 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book addNewBook(Book book) {
-        return bookRepository.save(book);
-    }
+    public ResponseEntity<?> addNewBook(Book book)
+    {
+        Book newBook = bookRepository.save(book);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(newBook.getBookId()) ;
+    }
     @Override
     public ResponseEntity<?> getBookShort(Integer bookId) {
         Book book = bookRepository.getReferenceById(bookId);
