@@ -1,23 +1,18 @@
 version: '3'
 
 services:
-  db:
-    image: postgres
+  postgres:
+    image: 'postgres:10'
+    container_name: 'java-postgres'
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: hack101cool
-      POSTGRES_DB: Library
-    volumes:
-      - db-data:/var/lib/postgresql/data
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=hack101cool'
+      - 'POSTGRES_DB=Library'
 
   app:
     build: .
+    container_name: 'java-app'
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Library
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: hack101cool
 
-volumes:
-  db-data:
+
